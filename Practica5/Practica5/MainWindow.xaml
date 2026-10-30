@@ -1,0 +1,99 @@
+﻿<Window x:Class="Practica5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practica5"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" 
+                   Text="Gestión de incidencias técnicas"
+                   FontSize="20"
+                   FontWeight="Bold"/>
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="5" Grid.Column="0">
+                <Label Grid.Column="0"
+                   Content="Título"
+                       Margin="5"/>
+                <Label Grid.Column="0"
+                   Content="Categoria:"
+                       Margin="5"/>
+                <Label Grid.Column="0"
+                   Content="Prioridad:"
+                       Margin="5"/>
+                <Label Grid.Column="0"
+                   Content="Tiempo estimado:"
+                       Margin="5"/>
+            </StackPanel>
+            <StackPanel Margin="5" Grid.Column="1">
+                <TextBox Grid.Column="1"
+                     x:Name="txtTitulo"
+                     Height="25"
+                         Margin="5"/>
+                <ComboBox Margin="5" x:Name="cbCategoria"  SelectionChanged="CbCategoria_SelectionChanged">
+                    <ComboBoxItem Content="Software"/>
+                    <ComboBoxItem Content="Red"/>
+                    <ComboBoxItem Content="Otros"/>
+                </ComboBox>
+                <WrapPanel Margin="5">
+                    <RadioButton Content="Baja" Tag="Baja" Margin="5"/>
+                    <RadioButton Content="Media" Tag="Media" Margin="5"/>
+                    <RadioButton Content="Alta" Tag ="Alta" Margin="5"/>
+                </WrapPanel>
+                <WrapPanel >
+                    <TextBox Grid.Column="1"
+                     x:Name="txtTiempo"
+                     Height="25"
+                             Width="100"
+                         Margin="5"/>
+                    <TextBlock Text="minutos" Margin="5"/>
+                </WrapPanel>
+            </StackPanel>
+
+        </Grid>
+        <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
+            <Button Content="Registrar incidencia" Margin="10"
+                    Click="BtnRegistrar_Click"/>
+            <Button Content="Gestionar incidencia" Margin="10"
+                    Click="BtnGestionar_Click"/>
+            <Button Content="Limpiar" Margin="10"
+                    Click="BtnLimpiar_Click"/>
+        </WrapPanel>
+        <GroupBox Grid.Row="3" Header="Incidencias registradas">
+            <ListView x:Name="lvIncidencias"
+                      Height="140"
+                      Margin="8">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Título"
+                                        Width="150"
+                                        DisplayMemberBinding="{Binding Titulo}"/>
+                        <GridViewColumn Header="Categoria"
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding Categoria}"/>
+                        <GridViewColumn Header="Prioridad"
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding Prioridad}"/>
+                        <GridViewColumn Header="Tiempo"
+                                        Width="60"
+                                        DisplayMemberBinding="{Binding Tiempo}"/>
+                        <GridViewColumn Header="Estado"
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding Estado}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
+    </Grid>
+</Window>
