@@ -20,26 +20,26 @@
         <Grid Grid.Row="1" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="180"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
             <StackPanel Margin="5" Grid.Column="0">
                 <Label Grid.Column="0"
-                   Content="Título"
+                       Content="Título"
                        Margin="5"/>
                 <Label Grid.Column="0"
-                   Content="Categoria:"
+                       Content="Categoria:"
                        Margin="5"/>
                 <Label Grid.Column="0"
-                   Content="Prioridad:"
+                       Content="Prioridad:"
                        Margin="5"/>
                 <Label Grid.Column="0"
-                   Content="Tiempo estimado:"
+                       Content="Tiempo estimado:"
                        Margin="5"/>
             </StackPanel>
             <StackPanel Margin="5" Grid.Column="1">
                 <TextBox Grid.Column="1"
-                     x:Name="txtTitulo"
-                     Height="25"
+                         x:Name="txtTitulo"
+                         Height="25"
                          Margin="5"/>
                 <ComboBox Margin="5" x:Name="cbCategoria"  SelectionChanged="CbCategoria_SelectionChanged">
                     <ComboBoxItem Content="Software"/>
@@ -47,16 +47,16 @@
                     <ComboBoxItem Content="Otros"/>
                 </ComboBox>
                 <WrapPanel Margin="5">
-                    <RadioButton Content="Baja" Tag="Baja" Margin="5"/>
-                    <RadioButton Content="Media" Tag="Media" Margin="5"/>
-                    <RadioButton Content="Alta" Tag ="Alta" Margin="5"/>
+                    <RadioButton x:Name="rbBaja" Content="Baja" Margin="5"/>
+                    <RadioButton x:Name="rbMedia" Content="Media" Margin="5"/>
+                    <RadioButton x:Name="rbAlta" Content="Alta" Margin="5"/>
                 </WrapPanel>
-                <WrapPanel >
+                <WrapPanel>
                     <TextBox Grid.Column="1"
-                     x:Name="txtTiempo"
-                     Height="25"
+                             x:Name="txtTiempo"
+                             Height="25"
                              Width="100"
-                         Margin="5"/>
+                             Margin="5"/>
                     <TextBlock Text="minutos" Margin="5"/>
                 </WrapPanel>
             </StackPanel>
