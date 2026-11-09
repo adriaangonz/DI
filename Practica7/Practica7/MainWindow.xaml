@@ -1,0 +1,97 @@
+﻿<Window x:Class="Practica7.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practica7"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <TextBlock Text="Nuevo Pedido" FontSize="16" FontWeight="Bold" Margin="0,0,0,15"/>
+
+            <TextBlock Text="Nombre del cliente:" Margin="0,0,0,3"/>
+            <TextBox x:Name="txtCliente" Margin="0,0,0,10" Height="24"/>
+
+            <TextBlock Text="Producto:" Margin="0,0,0,3"/>
+            <ComboBox x:Name="cmbProducto" Margin="0,0,0,10" Height="24">
+                <ComboBoxItem Content="Café"/>
+                <ComboBoxItem Content="Té"/>
+                <ComboBoxItem Content="Bocadillo"/>
+                <ComboBoxItem Content="Repostería"/>
+            </ComboBox>
+
+            <TextBlock Text="Cantidad:" Margin="0,0,0,3"/>
+            <TextBox x:Name="txtCantidad" Margin="0,0,0,10" Height="24"/>
+
+            <TextBlock Text="Tipo de recogida:" Margin="0,0,0,3"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <RadioButton x:Name="rbEnLocal" Content="En local" IsChecked="True" Margin="0,0,15,0"/>
+                <RadioButton x:Name="rbParaLlevar" Content="Para llevar"/>
+            </StackPanel>
+
+            <TextBlock Text="Observaciones:" Margin="0,0,0,3"/>
+            <TextBox x:Name="txtObservaciones" Height="70" TextWrapping="Wrap" AcceptsReturn="True" 
+                         VerticalScrollBarVisibility="Auto" Margin="0,0,0,15"/>
+
+            <Button Content="Registrar pedido" Height="32" FontWeight="SemiBold" Click="BtnRegistrar_Click"/>
+        </StackPanel>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <GroupBox>
+                <GroupBox.Header>
+                    <TextBlock x:Name="tbContadorPendientes" Text="Pedidos pendientes (0)" FontWeight="Bold"/>
+                </GroupBox.Header>
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <ListView x:Name="lvPendientes">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Cliente" DisplayMemberBinding="{Binding Cliente}" Width="120"/>
+                                <GridViewColumn Header="Producto" DisplayMemberBinding="{Binding Producto}" Width="100"/>
+                                <GridViewColumn Header="Cantidad" DisplayMemberBinding="{Binding Cantidad}" Width="65"/>
+                                <GridViewColumn Header="Recogida" DisplayMemberBinding="{Binding TipoRecogida}" Width="95"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Grid.Row="1" Content="Preparar pedido" Height="28" Width="140" 
+                            HorizontalAlignment="Right" Margin="0,6,0,0" Click="BtnPreparar_Click"/>
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Row="1">
+                <GroupBox.Header>
+                    <TextBlock x:Name="tbContadorPreparados" Text="Pedidos preparados (0)" FontWeight="Bold"/>
+                </GroupBox.Header>
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ListView x:Name="lvPreparados">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Cliente" DisplayMemberBinding="{Binding Cliente}" Width="120"/>
+                                <GridViewColumn Header="Producto" DisplayMemberBinding="{Binding Producto}" Width="100"/>
+                                <GridViewColumn Header="Cantidad" DisplayMemberBinding="{Binding Cantidad}" Width="65"/>
+                                <GridViewColumn Header="Recogida" DisplayMemberBinding="{Binding TipoRecogida}" Width="95"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Grid.Row="1" Content="Devolver a pendientes" Height="28" Width="150" 
+                            HorizontalAlignment="Right" Margin="0,6,0,0" Click="BtnDevolver_Click"/>
+                </Grid>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Window>
