@@ -1,0 +1,87 @@
+﻿<Window x:Class="Practica6.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practica6"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Header="Nueva reserva" Grid.Column="0" Margin="0,0,6,0" Padding="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Nombre:" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtNombre" Grid.Row="0" Grid.Column="1" Height="24" VerticalContentAlignment="Center"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Actividad:" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="cmbActividad" Grid.Row="1" Grid.Column="1" Height="24" VerticalContentAlignment="Center">
+                        <ComboBoxItem Content="Visita guiada"/>
+                        <ComboBoxItem Content="Taller"/>
+                        <ComboBoxItem Content="Ruta"/>
+                        <ComboBoxItem Content="Actividad deportiva"/>
+                    </ComboBox>
+                    
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Fecha:" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="dpFecha" Grid.Row="2" Grid.Column="1" Height="24"/>
+                    
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Turno:" VerticalAlignment="Center"/>
+                    <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <RadioButton x:Name="rbManana" Content="Mañana" IsChecked="True" Margin="0,0,15,0"/>
+                        <RadioButton x:Name="rbTarde" Content="Tarde"/>
+                    </StackPanel>
+                    
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Número de plazas:" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtPlazas" Grid.Row="4" Grid.Column="1" Width="70" Height="24" 
+                             HorizontalAlignment="Left" VerticalContentAlignment="Center" Text="1"/>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Acciones" Grid.Column="1" Margin="6,0,0,0" Padding="15">
+                <StackPanel VerticalAlignment="Center">
+                    <Button x:Name="btnRegistrar" Content="Registrar reserva" Height="30" Margin="0,0,0,10" Click="BtnRegistrar_Click"/>
+                    <Button x:Name="btnDetalles" Content="Ver detalles" Height="30" Margin="0,0,0,10" Click="BtnDetalles_Click"/>
+                    <Button x:Name="btnEliminar" Content="Eliminar reserva" Height="30" Margin="0,0,0,20" Click="BtnEliminar_Click"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="Reservas registradas: " FontSize="14" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="lblContador" Text="0" FontSize="14" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+        <GroupBox Header="Listado de reservas" Grid.Row="1" Margin="0,5,0,0" Padding="5">
+            <ListView x:Name="lvReservas">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Nombre" Width="170" DisplayMemberBinding="{Binding Nombre}"/>
+                        <GridViewColumn Header="Actividad" Width="170" DisplayMemberBinding="{Binding Actividad}"/>
+                        <GridViewColumn Header="Fecha" Width="130" DisplayMemberBinding="{Binding FechaFormateada}"/>
+                        <GridViewColumn Header="Turno" Width="110" DisplayMemberBinding="{Binding Turno}"/>
+                        <GridViewColumn Header="Plazas" Width="80" DisplayMemberBinding="{Binding Plazas}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
+    </Grid>
+</Window>
