@@ -1,0 +1,63 @@
+<Window x:Class="Practica7.VentanaPreparacion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practica7"
+        mc:Ignorable="d"
+        Title="Preparación de pedido" Height="380" Width="430"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- TÍTULO -->
+        <TextBlock Grid.Row="0"
+                   Text="Confirmar preparación del pedido"
+                   FontSize="16"
+                   FontWeight="SemiBold"
+                   Margin="0,0,0,12"/>
+
+        <!-- DETALLES DEL PEDIDO (VINCULADOS MEDIANTE BINDING AL DATACONTEXT) -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Cliente:" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Cliente}" IsReadOnly="True" VerticalContentAlignment="Center" Height="24"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Producto:" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Producto}" IsReadOnly="True" VerticalContentAlignment="Center" Height="24"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Cantidad:" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Cantidad}" IsReadOnly="True" VerticalContentAlignment="Center" Height="24"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Tipo de recogida:" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding TipoRecogida}" IsReadOnly="True" VerticalContentAlignment="Center" Height="24"/>
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Observaciones:" Margin="0,5,0,0"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Observaciones}" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" 
+                     VerticalScrollBarVisibility="Auto" Margin="0,5,0,0"/>
+        </Grid>
+
+        <!-- BOTONES DE ACCIÓN -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button x:Name="btnConfirmar" Content="Confirmar preparación" Height="28" Padding="10,0" Margin="0,0,10,0" 
+                    IsDefault="True" Click="BtnConfirmar_Click"/>
+            <Button x:Name="btnCancelar" Content="Cancelar" Height="28" Width="80" 
+                    IsCancel="True" Click="BtnCancelar_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

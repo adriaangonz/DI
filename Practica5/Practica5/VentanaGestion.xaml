@@ -5,14 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Practica5"
         mc:Ignorable="d"
-        Title="VentanaGestion" Height="450" Width="800">
+        Title="Gestión de incidencia" Height="390" Width="450"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid Margin="20">
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -20,73 +16,67 @@
 
         <!-- TÍTULO -->
         <TextBlock Grid.Row="0"
-                   Text="Resumen de la incidencia"
-                   FontSize="22"
-                   FontWeight="Bold"
+                   Text="Gestión de incidencia técnica"
+                   FontSize="16"
+                   FontWeight="SemiBold"
                    Margin="0,0,0,15"/>
 
-        <!-- titulo -->
-        <StackPanel Grid.Row="1"
-                    Orientation="Horizontal"
-                    Margin="0,5">
+        <!-- DATOS DE LA INCIDENCIA Y CAMBIO DE ESTADO -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
 
-            <TextBlock Text="Titulo: "
-                       FontWeight="Bold"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Título:" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtTitulo" Grid.Row="0" Grid.Column="1" IsReadOnly="True" VerticalContentAlignment="Center" Height="25"/>
 
-            <TextBlock x:Name="txtTitulo"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Categoría:" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtCategoria" Grid.Row="1" Grid.Column="1" IsReadOnly="True" VerticalContentAlignment="Center" Height="25"/>
 
-        </StackPanel>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Prioridad:" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtPrioridad" Grid.Row="2" Grid.Column="1" IsReadOnly="True" VerticalContentAlignment="Center" Height="25"/>
 
-        <!-- categoria -->
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Tiempo estimado:" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtTiempo" Grid.Row="3" Grid.Column="1" IsReadOnly="True" VerticalContentAlignment="Center" Height="25"/>
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Estado actual:" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtEstadoActual" Grid.Row="4" Grid.Column="1" IsReadOnly="True" VerticalContentAlignment="Center" Height="25"/>
+
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Nuevo estado:" VerticalAlignment="Center" FontWeight="SemiBold"/>
+            <ComboBox x:Name="cmbNuevoEstado" Grid.Row="5" Grid.Column="1" Height="25" VerticalContentAlignment="Center">
+                <ComboBoxItem Content="Pendiente"/>
+                <ComboBoxItem Content="En proceso"/>
+                <ComboBoxItem Content="Resuelta"/>
+            </ComboBox>
+        </Grid>
+
+        <!-- BOTONES DE ACCIÓN -->
         <StackPanel Grid.Row="2"
                     Orientation="Horizontal"
-                    Margin="0,5">
-
-            <TextBlock Text="Categoria: "
-                       FontWeight="Bold"/>
-
-            <TextBlock x:Name="txtCategoria"/>
-
-        </StackPanel>
-
-        <!-- prioridad -->
-        <StackPanel Grid.Row="3"
-                    Orientation="Horizontal"
-                    Margin="0,5">
-
-            <TextBlock Text="Prioridad: "
-                       FontWeight="Bold"/>
-
-            <TextBlock x:Name="txtPrioridad"/>
-
-        </StackPanel>
-
-        <!-- MODALIDAD -->
-        <StackPanel Grid.Row="4"
-                    Orientation="Horizontal"
-                    Margin="0,5">
-            <TextBlock Text="Tiempo: "
-                       FontWeight="Bold"/>
-            <TextBlock x:Name="txtTiempo"/>
-        </StackPanel>
-
-        <!-- BOTONES -->
-        <StackPanel Grid.Row="6"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Right">
-
+                    HorizontalAlignment="Right"
+                    Margin="0,15,0,0">
             <Button x:Name="btnAceptar"
                     Content="Aceptar"
-                    Width="100"
-                    Margin="5"
+                    Width="90"
+                    Height="28"
+                    Margin="0,0,10,0"
+                    IsDefault="True"
                     Click="BtnAceptar_Click"/>
-
             <Button x:Name="btnCancelar"
                     Content="Cancelar"
-                    Width="100"
-                    Margin="5"
+                    Width="90"
+                    Height="28"
+                    IsCancel="True"
                     Click="BtnCancelar_Click"/>
-
         </StackPanel>
     </Grid>
 </Window>

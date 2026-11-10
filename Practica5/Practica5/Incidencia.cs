@@ -4,12 +4,13 @@ using System.Text;
 
 namespace Practica5
 {
-    internal class Incidencia
+    public class Incidencia
     {
-        public String Titulo { get; set; } = "";
-        public String Categoria { get; set; } = "";
-        public String Prioridad { get; set; } = "";
+        public string Titulo { get; set; } = string.Empty;
+        public string Categoria { get; set; } = string.Empty;
+        public string Prioridad { get; set; } = string.Empty;
         public int Tiempo { get; set; }
-        public String Estado { get; set; } = "";
+        // El estado inicial de toda nueva incidencia será Pendiente
+        public string Estado { get; set; } = "Pendiente";
     }
 }

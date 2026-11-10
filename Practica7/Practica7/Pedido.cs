@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Practica7
 {
-    internal class Pedido
+    public class Pedido
     {
-        public string nombre { get; set; }
-        public string producto { get; set; }
-        public int cantidad { get; set; }
-        public string tipoRecogida { get; set; }
-        public string observaciones { get; set; }
+        public string Cliente { get; set; } = string.Empty;
+        public string Producto { get; set; } = string.Empty;
+        public int Cantidad { get; set; }
+        public string TipoRecogida { get; set; } = string.Empty;
+        public string Observaciones { get; set; } = string.Empty;
     }
 }
