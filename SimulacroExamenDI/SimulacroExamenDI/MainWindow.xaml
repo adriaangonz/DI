@@ -1,0 +1,148 @@
+<Window x:Class="SimulacroExamenDI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TechFix - Gestor de Reparaciones" Height="640" Width="920"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="12">
+        <TabControl x:Name="tcPrincipal">
+            <TabItem Header="Nueva / Pendientes">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Formulario de alta -->
+                    <GroupBox Header="Registrar Reparación" Grid.Row="0" Padding="10" Margin="0,0,0,10">
+                        <Grid x:Name="panelFormulario">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Fila 0: Cliente y Dispositivo -->
+                            <Label Content="Cliente:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,8,8"/>
+                            <TextBox x:Name="txtCliente" Grid.Row="0" Grid.Column="1" Height="26" VerticalContentAlignment="Center" Margin="0,0,16,8"/>
+
+                            <Label Content="Dispositivo:" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,8,8"/>
+                            <ComboBox x:Name="cbDispositivo" Grid.Row="0" Grid.Column="3" Height="26" Margin="0,0,0,8">
+                                <ComboBoxItem Content="Portátil"/>
+                                <ComboBoxItem Content="Móvil"/>
+                                <ComboBoxItem Content="Tablet"/>
+                                <!-- TODO XAML 2: Añade aquí el ComboBoxItem "Consola" -->
+                            </ComboBox>
+
+                            <!-- Fila 1: Fecha y Tipo -->
+                            <Label Content="Fecha entrada:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,8,8"/>
+                            <DatePicker x:Name="dpFecha" Grid.Row="1" Grid.Column="1" Margin="0,0,16,8"/>
+
+                            <Label Content="Tipo:" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,8,8"/>
+                            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,0,8">
+                                <!-- TODO XAML 3: Enlaza los eventos Checked de rbNormal y rbGarantia -->
+                                <RadioButton x:Name="rbNormal" Content="Normal" GroupName="TipoRep" Margin="0,0,15,0"/>
+                                <RadioButton x:Name="rbGarantia" Content="Garantía" GroupName="TipoRep"/>
+                            </StackPanel>
+
+                            <!-- Fila 2: Slider Urgencia + ProgressBar -->
+                            <Label Content="Urgencia (1-5):" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,8,8"/>
+                            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,8">
+                                <!-- TODO XAML 4: Enlaza ValueChanged en slUrgencia -->
+                                <Slider x:Name="slUrgencia" Width="150" Minimum="1" Maximum="5" Value="1"
+                                        TickFrequency="1" IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
+                                <Label x:Name="lblUrgencia" Content="Nivel: 1 / 5" Margin="8,0,0,0" FontWeight="SemiBold"/>
+                            </StackPanel>
+
+                            <Label Content="Prioridad:" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,8,8"/>
+                            <ProgressBar x:Name="pbUrgencia" Grid.Row="2" Grid.Column="3" Minimum="1" Maximum="5" Value="1" Height="18" VerticalAlignment="Center" Margin="0,0,0,8"/>
+
+                            <!-- Fila 3: Aviso garantía y Botón Registrar -->
+                            <Label x:Name="lblAvisoGarantia" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Content="Reparación cubierta por garantía (coste 0 €)"
+                                   Foreground="DarkGreen" FontWeight="Bold" Visibility="Collapsed" VerticalAlignment="Center"/>
+
+                            <!-- TODO XAML 5: Enlaza el evento Click de btnRegistrar -->
+                            <Button x:Name="btnRegistrar" Grid.Row="3" Grid.Column="3" Content="Registrar Reparación"
+                                    Height="30" HorizontalAlignment="Right" Padding="14,0" FontWeight="SemiBold"/>
+                        </Grid>
+                    </GroupBox>
+
+                    <!-- Buscador -->
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,8">
+                        <Label Content="Buscar cliente:" VerticalAlignment="Center"/>
+                        <!-- TODO XAML 6: Enlaza TextChanged en txtBuscar -->
+                        <TextBox x:Name="txtBuscar" Width="240" Height="26" VerticalContentAlignment="Center" Margin="6,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- ListView Pendientes -->
+                    <ListView x:Name="lvPendientes" Grid.Row="2">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="180" DisplayMemberBinding="{Binding Cliente}">
+                                    <!-- TODO XAML 7: Enlaza Click="GridViewColumnHeader_Click" en las cabeceras -->
+                                    <GridViewColumnHeader Content="Cliente" Tag="Cliente"/>
+                                </GridViewColumn>
+                                <GridViewColumn Width="120" DisplayMemberBinding="{Binding Dispositivo}">
+                                    <GridViewColumnHeader Content="Dispositivo" Tag="Dispositivo"/>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Fecha" Width="110" DisplayMemberBinding="{Binding FechaEntrada, StringFormat=dd/MM/yyyy}"/>
+                                <GridViewColumn Width="90" DisplayMemberBinding="{Binding Urgencia}">
+                                    <GridViewColumnHeader Content="Urgencia" Tag="Urgencia"/>
+                                </GridViewColumn>
+                                <!-- TODO XAML 8: Añade la columna "Estado" enlazada a {Binding Estado} -->
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <!-- Pie: contador y botones de acción -->
+                    <DockPanel Grid.Row="3" Margin="0,10,0,0">
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
+                            <Label Content="Total pendientes:"/>
+                            <Label x:Name="lblTotalPendientes" Content="0" FontWeight="Bold"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <!-- TODO XAML 9: Enlaza los eventos Click de estos 3 botones -->
+                            <Button x:Name="btnVerEditar" Content="Ver / Editar" Height="30" Padding="12,0" Margin="0,0,8,0"/>
+                            <Button x:Name="btnFinalizar" Content="Finalizar" Height="30" Padding="12,0" Margin="0,0,8,0"/>
+                            <Button x:Name="btnEliminar" Content="Eliminar" Height="30" Padding="12,0"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Finalizadas">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- TODO XAML 10: Completa el ListView lvFinalizadas con un ItemTemplate o GridView
+                         que muestre Cliente, Dispositivo y Estado de cada reparación finalizada -->
+                    <ListView x:Name="lvFinalizadas" Grid.Row="0">
+                    </ListView>
+
+                    <DockPanel Grid.Row="1" Margin="0,10,0,0">
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
+                            <Label Content="Total finalizadas:"/>
+                            <Label x:Name="lblTotalFinalizadas" Content="0" FontWeight="Bold"/>
+                        </StackPanel>
+
+                        <!-- TODO XAML 11: Enlaza el evento Click de btnReabrir -->
+                        <Button x:Name="btnReabrir" Content="Reabrir Reparación" Height="30" Padding="14,0" HorizontalAlignment="Right"/>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

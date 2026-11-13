@@ -1,0 +1,43 @@
+<Window x:Class="SimulacroExamenDI.VentanaDetalle"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Detalle de Reparación" Height="360" Width="440"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Cliente:" Grid.Row="0" Grid.Column="0" FontWeight="Bold"/>
+        <TextBlock x:Name="tbCliente" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Cliente}"/>
+
+        <Label Content="Dispositivo:" Grid.Row="1" Grid.Column="0" FontWeight="Bold"/>
+        <!-- TODO XAML 12: Enlaza Text="{Binding Dispositivo}" en este TextBlock -->
+        <TextBlock x:Name="tbDispositivo" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
+
+        <Label Content="Estado:" Grid.Row="2" Grid.Column="0" FontWeight="Bold" Margin="0,8,0,0"/>
+        <ComboBox x:Name="cbEstado" Grid.Row="2" Grid.Column="1" Margin="0,8,0,0" Height="26">
+            <ComboBoxItem Content="Pendiente"/>
+            <ComboBoxItem Content="En taller"/>
+            <ComboBoxItem Content="Esperando pieza"/>
+        </ComboBox>
+
+        <Label Content="Notas técnicas:" Grid.Row="3" Grid.Column="0" FontWeight="Bold" Margin="0,10,8,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtNotas" Grid.Row="3" Grid.Column="1" Margin="0,10,0,0"
+                 AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,14,0,0">
+            <!-- TODO XAML 13: Enlaza los eventos Click de btnGuardar y btnCancelar -->
+            <Button x:Name="btnGuardar" Content="Guardar" Width="90" Height="30" Margin="0,0,10,0" FontWeight="SemiBold"/>
+            <Button x:Name="btnCancelar" Content="Cancelar" Width="90" Height="30"/>
+        </StackPanel>
+    </Grid>
+</Window>
